@@ -9,8 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "#030303",
+        foreground: "#ffffff",
+        primary: "#ffffff", // Pure white neon glow
+        accent1: "#cbd5e1", // Silver Slate (Zinc 300)
+        accent2: "#71717a", // Muted Charcoal (Zinc 500)
+      },
+      fontFamily: {
+        sans: ["Inter", "Outfit", "sans-serif"],
       },
     },
   },
