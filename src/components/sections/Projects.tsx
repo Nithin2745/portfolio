@@ -151,7 +151,7 @@ export function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-cursor-label="SOURCE CODE"
-                  className="flex items-center gap-2 text-xs font-mono tracking-widest font-bold border border-white/20 px-6 py-3.5 rounded-xl hover:bg-primary hover:text-white hover:border-primary/50 transition-all duration-300 z-20 cursor-none"
+                  className="flex items-center gap-2 text-xs font-mono tracking-widest font-bold border border-white/20 px-6 py-3.5 rounded-xl hover:bg-primary hover:text-black hover:border-primary/50 transition-all duration-300 z-20 cursor-none"
                 >
                   <FaGithub className="w-4 h-4" />
                   VIEW REPOSITORY
