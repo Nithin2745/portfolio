@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "@studio-freight/react-lenis";
 
 interface Section {
   id: string;
@@ -21,6 +22,7 @@ const SECTIONS: Section[] = [
 ];
 
 export function HudNavigation() {
+  const lenis = useLenis();
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
 
@@ -60,9 +62,13 @@ export function HudNavigation() {
   }, []);
 
   const handleWarp = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(`#${id}`);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 

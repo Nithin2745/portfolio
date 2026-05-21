@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Terminal } from "lucide-react";
+import { useLenis } from "@studio-freight/react-lenis";
 
 interface NavItem {
   id: string;
@@ -22,6 +23,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export function Navbar() {
+  const lenis = useLenis();
   const [activeSection, setActiveSection] = useState<string>("hero");
   const [scrolled, setScrolled] = useState<boolean>(false);
 
@@ -65,9 +67,13 @@ export function Navbar() {
   }, []);
 
   const handleWarp = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(`#${id}`);
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -76,7 +82,7 @@ export function Navbar() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
-      className={`fixed top-0 left-0 w-full z-45 md:hidden transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-40 md:hidden transition-all duration-300 ${
         scrolled 
           ? "bg-black/85 backdrop-blur-md border-b border-white/10 py-2.5 shadow-[0_4px_24px_rgba(0,0,0,0.6)]" 
           : "bg-black/40 backdrop-blur-sm border-b border-white/[0.04] py-3.5"
@@ -107,7 +113,7 @@ export function Navbar() {
         {/* Navigation Row Container */}
         {/* On mobile: Touch-swipeable horizontal track with edge fading */}
         {/* On desktop: standard horizontal row aligned to the right */}
-        <div className="w-full md:w-auto overflow-x-auto md:overflow-x-visible scrollbar-none flex items-center relative py-1 mask-marquee md:mask-none">
+        <div className="flex-1 min-w-0 md:flex-initial md:w-auto overflow-x-auto md:overflow-x-visible scrollbar-none flex items-center relative py-1 mask-marquee md:mask-none">
           <nav className="flex items-center gap-1.5 md:gap-1 xl:gap-2 shrink-0">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
