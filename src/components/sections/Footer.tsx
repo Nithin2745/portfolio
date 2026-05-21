@@ -6,7 +6,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 export function Footer() {
   return (
-    <footer id="contact" className="py-24 px-6 md:px-12 bg-transparent relative z-10 border-t border-white/[0.04] overflow-hidden select-none">
+    <footer className="py-24 px-6 md:px-12 bg-transparent relative z-10 border-t border-white/[0.04] overflow-hidden select-none">
       {/* Dynamic Cosmic Space Vortex Background Gradient (Primary & Accent color blends) */}
       <div className="absolute bottom-0 right-0 translate-y-1/3 translate-x-1/3 w-[80vw] h-[80vw] bg-[radial-gradient(circle,rgba(255,255,255,0.06)_0%,rgba(200,200,200,0.02)_40%,transparent_70%)] rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/3 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_60%)] rounded-full blur-[90px] pointer-events-none" />

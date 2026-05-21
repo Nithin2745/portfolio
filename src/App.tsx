@@ -9,6 +9,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Projects } from "@/components/sections/Projects";
 import { Achievements } from "@/components/sections/Achievements";
 import { Education } from "@/components/sections/Education";
+import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
             <Projects />
             <Achievements />
             <Education />
+            <Contact />
             <Footer />
           </main>
         </LoadingGate>
