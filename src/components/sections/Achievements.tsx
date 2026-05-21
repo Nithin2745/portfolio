@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Trophy, Medal } from "lucide-react";
+import { DecryptedText } from "@/components/DecryptedText";
 
 export function Achievements() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-transparent relative z-10 border-t border-white/[0.04] select-none">
+    <section id="achievements" className="py-24 px-6 md:px-12 bg-transparent relative z-10 border-t border-white/[0.04] select-none">
       <div className="max-w-6xl mx-auto">
         {/* Header HUD Registry */}
         <motion.div
@@ -18,7 +19,9 @@ export function Achievements() {
           <div className="text-[10px] font-mono text-white/40 tracking-[0.25em] mb-1 font-semibold">
             SYS.ARENA_TELEMETRY // HACKATHON_GRID
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">THE ARENA</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">
+            <DecryptedText text="THE ARENA" />
+          </h2>
           <div className="w-12 h-0.5 bg-white mx-auto mb-6 opacity-30" />
           <p className="text-foreground/60 text-lg font-light">Ranked deployments under rapid sprint conditions.</p>
         </motion.div>

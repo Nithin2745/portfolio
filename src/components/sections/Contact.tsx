@@ -4,6 +4,7 @@ import React, { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Send, User, Terminal, CheckCircle2, AlertTriangle, RefreshCw } from "lucide-react";
 import { InteractiveCard } from "../InteractiveCard";
+import { DecryptedText } from "@/components/DecryptedText";
 
 // Web3Forms API Endpoint
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
@@ -118,7 +119,9 @@ export function Contact() {
           <div className="text-[10px] font-mono text-white/40 tracking-[0.25em] mb-1 font-semibold">
             SYS.UPLINK_PORTAL // SECURE_TRANSMIT
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">ESTABLISH UPLINK</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">
+            <DecryptedText text="ESTABLISH UPLINK" />
+          </h2>
           <div className="w-12 h-0.5 bg-white mx-auto mb-6 opacity-30" />
           <p className="text-foreground/60 text-lg font-light max-w-lg mx-auto">
             Calibrate your parameters and transmit thoughts directly across the quantum ether.

@@ -8,6 +8,8 @@ function CelestialField() {
   const pointsRef1 = useRef<THREE.Points>(null);
   const pointsRef2 = useRef<THREE.Points>(null);
   const scrollYRef = useRef(0);
+  const warpRef = useRef(1);
+  const isWarpingRef = useRef(false);
 
   // Synchronize with page scroll
   useEffect(() => {
@@ -16,6 +18,54 @@ function CelestialField() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Listen to visual warp-speed event from terminal easter egg
+  useEffect(() => {
+    const handleWarp = () => {
+      if (isWarpingRef.current) return;
+      isWarpingRef.current = true;
+      
+      let start = performance.now();
+      const duration = 1200; // time to reach peak warp
+      const peakWarp = 40; // warp speed factor multiplier
+      
+      const animateUp = (now: number) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Easing out quad for smooth acceleration
+        warpRef.current = 1 + (peakWarp - 1) * (1 - (1 - progress) * (1 - progress));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animateUp);
+        } else {
+          // Stay at hyperwarp speed for 1.8 seconds, then safely decelerate
+          setTimeout(() => {
+            let startDown = performance.now();
+            const durationDown = 2500;
+            const animateDown = (nowDown: number) => {
+              const elapsedDown = nowDown - startDown;
+              const progressDown = Math.min(elapsedDown / durationDown, 1);
+              // Easing in-out sine for smooth deceleration
+              const ease = 1 - (Math.cos(Math.PI * progressDown) + 1) / 2;
+              warpRef.current = peakWarp - (peakWarp - 1) * ease;
+              
+              if (progressDown < 1) {
+                requestAnimationFrame(animateDown);
+              } else {
+                warpRef.current = 1;
+                isWarpingRef.current = false;
+              }
+            };
+            requestAnimationFrame(animateDown);
+          }, 1800);
+        }
+      };
+      requestAnimationFrame(animateUp);
+    };
+
+    window.addEventListener("warp-speed", handleWarp);
+    return () => window.removeEventListener("warp-speed", handleWarp);
   }, []);
 
   // Generate distant sharp stars
@@ -37,7 +87,7 @@ function CelestialField() {
     return positions;
   }, []);
 
-  // Generate closer drifting space dust particles (colored blue, orange, amber)
+  // Generate closer drifting space dust particles (colored white, silver slate, deep charcoal)
   const [cosmicDustPositions, cosmicDustColors] = useMemo(() => {
     const count = 300;
     const positions = new Float32Array(count * 3);
@@ -72,20 +122,21 @@ function CelestialField() {
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     const scrollPercent = scrollYRef.current / (typeof document !== "undefined" ? (document.documentElement.scrollHeight - window.innerHeight || 1) : 1);
+    const warp = warpRef.current;
 
     // Drifting animation for distant stars
     if (pointsRef1.current) {
-      // Base slow rotation
-      pointsRef1.current.rotation.y = t * 0.005;
+      // Base slow rotation scaled by warp factor
+      pointsRef1.current.rotation.y = t * 0.005 * warp;
       // Scroll-linked rotation tilt + subtle mouse tilt
       pointsRef1.current.rotation.x = scrollPercent * 0.3 + (state.pointer.y * 0.05);
-      pointsRef1.current.rotation.y += state.pointer.x * 0.001;
+      pointsRef1.current.rotation.y += state.pointer.x * 0.001 * warp;
     }
 
     // Drifting animation for drifting space dust + interactive 3D camera sway
     if (pointsRef2.current) {
-      pointsRef2.current.rotation.y = -t * 0.012;
-      pointsRef2.current.rotation.z = Math.sin(t * 0.1) * 0.05;
+      pointsRef2.current.rotation.y = -t * 0.012 * warp;
+      pointsRef2.current.rotation.z = Math.sin(t * 0.1) * 0.05 * warp;
       
       // Calculate responsive target coordinates based on scroll AND cursor positions
       const targetX = state.pointer.x * 2.2;
@@ -94,6 +145,18 @@ function CelestialField() {
       // Smoothly sway the camera in 3D space to produce a luxurious responsive parallax experience
       state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, targetX, 0.05);
       state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, targetY, 0.05);
+    }
+
+    // Dynamic lens distortion camera stretching on hyperwarp speeds
+    if (warp > 1) {
+      const targetFov = 60 + (warp - 1) * 0.75;
+      const persCam = state.camera as THREE.PerspectiveCamera;
+      persCam.fov = THREE.MathUtils.lerp(persCam.fov, Math.min(targetFov, 90), 0.1);
+      persCam.updateProjectionMatrix();
+    } else {
+      const persCam = state.camera as THREE.PerspectiveCamera;
+      persCam.fov = THREE.MathUtils.lerp(persCam.fov, 60, 0.05);
+      persCam.updateProjectionMatrix();
     }
   });
 

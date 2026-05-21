@@ -24,17 +24,17 @@ export function Atom3D() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setPositionX(2.8);
+        setPositionX(0);
         setPositionY(0);
-        setScale(1.0);
+        setScale(0.85);
       } else if (window.innerWidth >= 768) {
-        setPositionX(2.0);
+        setPositionX(0);
         setPositionY(0);
-        setScale(0.9);
+        setScale(0.75);
       } else {
         setPositionX(0);
-        setPositionY(-1.2);
-        setScale(0.7);
+        setPositionY(0);
+        setScale(0.65);
       }
     };
     handleResize();

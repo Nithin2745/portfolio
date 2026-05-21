@@ -5,6 +5,7 @@ import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { InteractiveCard } from "@/components/InteractiveCard";
+import { DecryptedText } from "@/components/DecryptedText";
 
 const WaveformVisualizer = () => {
   return (
@@ -74,7 +75,7 @@ export function Projects() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   return (
-    <section className="py-24 bg-transparent relative z-10 overflow-hidden select-none border-t border-white/[0.04]">
+    <section id="projects" className="py-24 bg-transparent relative z-10 overflow-hidden select-none border-t border-white/[0.04]">
       {/* HUD Telemetry styling header */}
       <div className="px-6 md:px-12 max-w-7xl mx-auto mb-20">
         <motion.div
@@ -87,7 +88,9 @@ export function Projects() {
           <div className="text-[10px] font-mono text-white/40 tracking-[0.25em] mb-1">
             SYS.DEPLOYMENT_GRID // LAB_RECORDS
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter text-white">THE LAB</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter text-white">
+            <DecryptedText text="THE LAB" />
+          </h2>
           <p className="text-foreground/60 text-lg max-w-xl font-light">
             Where architecture meets application. Case studies of systems engineered for scalable orbits.
           </p>

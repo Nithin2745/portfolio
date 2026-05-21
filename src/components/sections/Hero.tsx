@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import { DecryptedText } from "@/components/DecryptedText";
 
 export function Hero() {
   return (
-    <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden scanline">
+    <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden scanline">
 
       {/* Cyber HUD Framing elements */}
       <div className="absolute inset-x-6 top-8 bottom-8 border border-white/[0.03] pointer-events-none z-10 rounded-2xl">
@@ -19,11 +20,19 @@ export function Hero() {
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-4 h-[1px] bg-white/10" />
         <div className="absolute top-1/2 right-0 -translate-y-1/2 w-4 h-[1px] bg-white/10" />
 
-        {/* Telemetry HUD Labels */}
-        <div className="absolute top-6 left-6 hidden md:block text-[9px] font-mono text-primary/60 tracking-[0.2em]">
-          SYS.TELEMETRY: ONLINE <br />
-          CORE.STATUS: QUANTUM_OPTIMAL
-        </div>
+        {/* Telemetry HUD Labels (Interactive Easter Egg Trigger) */}
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent("toggle-console"))}
+          data-cursor-label="BOOT TERMINAL PORTAL"
+          className="absolute top-6 left-6 hidden md:block text-[9.5px] font-mono text-primary/60 tracking-[0.2em] pointer-events-auto hover:text-white transition-all cursor-none duration-300 text-left border border-transparent hover:border-white/10 hover:bg-white/[0.01] p-2.5 rounded-lg active:scale-[0.97]"
+        >
+          <span className="flex items-center gap-1.5 font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping inline-block" />
+            <span>SYS.TELEMETRY: ONLINE</span>
+          </span>
+          <span className="block mt-1.5 text-white/30 transition-colors uppercase text-[8px] tracking-widest font-semibold">CORE.STATUS: OPTIMAL // [INTERFACE DIRECT]</span>
+        </button>
+
         <div className="absolute top-6 right-6 hidden md:block text-[9px] font-mono text-accent1/60 tracking-[0.2em] text-right">
           COORDINATES: ATT_IN_05 <br />
           LATENCY: SUB-10MS
@@ -31,14 +40,16 @@ export function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="z-10 text-center px-4 md:px-8 mt-12 md:mt-0 flex flex-col items-center select-none max-w-4xl pb-24">
+      <div className="z-10 text-center px-4 md:px-8 flex flex-col items-center select-none max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 45, damping: 15, delay: 0.4 }}
-          className="mb-4 text-primary/90 uppercase tracking-[0.35em] text-xs md:text-sm font-bold font-mono text-glow-primary"
+          className="mb-4 text-primary/90 uppercase tracking-[0.35em] text-xs md:text-sm font-bold font-mono text-glow-primary flex items-center justify-center gap-1"
         >
-          &lt; Experience Engineer &gt;
+          <span>&lt;</span>
+          <DecryptedText text="Experience Engineer" delay={500} />
+          <span>&gt;</span>
         </motion.div>
         
         <motion.h1
@@ -92,22 +103,6 @@ export function Hero() {
           </a>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
-      >
-        <span className="text-[9px] font-mono uppercase tracking-[0.25em] text-foreground/45 mb-2.5">SCROLL TO ORBIT</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-        >
-          <ArrowDown className="w-4 h-4 text-foreground/45" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

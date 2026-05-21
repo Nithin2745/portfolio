@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap, Award } from "lucide-react";
+import { DecryptedText } from "@/components/DecryptedText";
 
 const education = [
   {
@@ -27,7 +28,7 @@ const certifications = [
 
 export function Education() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-transparent relative z-10 border-t border-white/[0.04] overflow-hidden select-none">
+    <section id="education" className="py-24 px-6 md:px-12 bg-transparent relative z-10 border-t border-white/[0.04] overflow-hidden select-none">
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-16">
         
         {/* Timeline academic roots - Constellation Transit Map */}
@@ -42,7 +43,9 @@ export function Education() {
             <div className="text-[10px] font-mono text-primary/60 tracking-[0.25em] mb-1 font-semibold">
               SYS.ACADEMIC_GRID // PATHWAY_NODES
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">THE FOUNDATION</h2>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">
+              <DecryptedText text="THE FOUNDATION" />
+            </h2>
             <p className="text-foreground/60 text-lg font-light">Academic orbits and continuous vector calibration.</p>
           </motion.div>
 

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
+import { DecryptedText } from "@/components/DecryptedText";
 
 type Mission = {
   id: string;
@@ -41,7 +42,7 @@ const missions: Mission[] = [
 
 export function Experience() {
   return (
-    <section className="py-24 px-6 md:px-12 bg-transparent relative z-10 select-none">
+    <section id="experience" className="py-24 px-6 md:px-12 bg-transparent relative z-10 select-none">
       <div className="max-w-4xl mx-auto">
         {/* Section Header HUD */}
         <motion.div
@@ -54,7 +55,9 @@ export function Experience() {
           <div className="text-[10px] font-mono text-accent1/60 tracking-[0.25em] mb-1 font-semibold">
             SYS.MISSION_REGISTRY // ARCHIVE
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">THE FIELD</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tighter">
+            <DecryptedText text="THE FIELD" />
+          </h2>
           <p className="text-foreground/60 text-lg font-light">Professional deployments and high-scale cloud infrastructure missions.</p>
         </motion.div>
 

@@ -29,6 +29,7 @@ export function LoadingGate({ children }: { children: React.ReactNode }) {
     // End loading screen after logs complete
     const endTimer = setTimeout(() => {
       setIsLoading(false);
+      window.dispatchEvent(new CustomEvent("system-glitch"));
     }, 2800);
 
     return () => {

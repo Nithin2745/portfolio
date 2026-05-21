@@ -46,6 +46,7 @@ export function Manifesto() {
 
   return (
     <section 
+      id="manifesto"
       ref={sectionRef} 
       className="py-32 md:py-48 px-6 md:px-12 bg-transparent relative z-10 flex flex-col items-center justify-center min-h-[70vh] select-none overflow-hidden"
     >
