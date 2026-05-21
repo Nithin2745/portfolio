@@ -56,7 +56,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 35, damping: 12, delay: 0.2 }}
-          className="text-5xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-balance mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 leading-none"
+          className="text-[2.6rem] sm:text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-balance mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 leading-none"
         >
           Nithin Datta <br className="hidden md:block" /> Attili
         </motion.h1>

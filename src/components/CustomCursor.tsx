@@ -8,8 +8,40 @@ export function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [cursorLabel, setCursorLabel] = useState("");
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
 
   useEffect(() => {
+    // Detect if device supports hover and a fine pointer (mouse, trackpad, stylus)
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setIsTouchDevice(!mediaQuery.matches);
+
+    // Initial class toggle based on pointer type
+    if (mediaQuery.matches) {
+      document.documentElement.classList.add("custom-cursor-active");
+    }
+
+    const handleMediaChange = (e: MediaQueryListEvent) => {
+      const isFine = e.matches;
+      setIsTouchDevice(!isFine);
+      if (isFine) {
+        document.documentElement.classList.add("custom-cursor-active");
+      } else {
+        document.documentElement.classList.remove("custom-cursor-active");
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleMediaChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaChange);
+      document.documentElement.classList.remove("custom-cursor-active");
+    };
+  }, []);
+
+  useEffect(() => {
+    // Return early and do not hook event listeners if this is a touch screen
+    if (isTouchDevice) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -57,7 +89,10 @@ export function CustomCursor() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
+  }, [isTouchDevice]);
+
+  // If touch device is detected, do not render visual cursor halo on screen
+  if (isTouchDevice) return null;
 
   return (
     <>
@@ -126,5 +161,6 @@ export function CustomCursor() {
     </>
   );
 }
+
 
 

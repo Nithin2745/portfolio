@@ -5,6 +5,7 @@ import { QuantumConsole } from "@/components/QuantumConsole";
 import { GlitchOverlay } from "@/components/GlitchOverlay";
 import { SpaceBackground } from "@/components/SpaceBackground";
 import { HudNavigation } from "@/components/HudNavigation";
+import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Stack } from "@/components/sections/Stack";
@@ -25,6 +26,7 @@ export default function App() {
       <SmoothScrolling>
         <LoadingGate>
           <CustomCursor />
+          <Navbar />
           <HudNavigation />
           <QuantumConsole />
           <GlitchOverlay />
@@ -44,3 +46,4 @@ export default function App() {
     </div>
   );
 }
+

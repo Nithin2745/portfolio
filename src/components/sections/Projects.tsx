@@ -163,7 +163,7 @@ export function Projects() {
             </div>
 
             {/* Visualizer Card */}
-            <div className="lg:w-1/2 flex items-center justify-center relative w-full">
+            <div className="lg:w-1/2 flex items-center justify-center relative w-full max-w-xl lg:max-w-none mx-auto">
               <InteractiveCard
                 className="w-full aspect-[4/3] flex flex-col items-center justify-center p-8 hud-corners"
                 glowColor="primary"
@@ -201,7 +201,7 @@ export function Projects() {
           
           <div className="relative z-10 w-full px-6 md:px-12 max-w-7xl mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-16 py-24">
             {/* Visualizer Card */}
-            <div className="lg:w-1/2 flex items-center justify-center relative w-full">
+            <div className="lg:w-1/2 flex items-center justify-center relative w-full max-w-xl lg:max-w-none mx-auto">
               <InteractiveCard
                 className="w-full aspect-[4/3] flex flex-col items-center justify-center p-8 hud-corners"
                 glowColor="accent1"

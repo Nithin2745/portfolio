@@ -76,7 +76,7 @@ export function Navbar() {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
-      className={`fixed top-0 left-0 w-full z-45 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-45 md:hidden transition-all duration-300 ${
         scrolled 
           ? "bg-black/85 backdrop-blur-md border-b border-white/10 py-2.5 shadow-[0_4px_24px_rgba(0,0,0,0.6)]" 
           : "bg-black/40 backdrop-blur-sm border-b border-white/[0.04] py-3.5"
@@ -96,6 +96,14 @@ export function Navbar() {
           </span>
         </button>
 
+        {/* On mobile: show a small terminal icon button that triggers the console */}
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent("toggle-console"))}
+          className="flex md:hidden items-center justify-center w-8 h-8 rounded-lg border border-white/10 bg-white/[0.02] text-white/60 hover:text-white hover:bg-white/5 focus:outline-none shrink-0 active:scale-95 transition-all"
+        >
+          <Terminal className="w-4 h-4" />
+        </button>
+ 
         {/* Navigation Row Container */}
         {/* On mobile: Touch-swipeable horizontal track with edge fading */}
         {/* On desktop: standard horizontal row aligned to the right */}
@@ -134,8 +142,9 @@ export function Navbar() {
             })}
           </nav>
         </div>
-
+ 
       </div>
     </motion.header>
   );
+
 }
